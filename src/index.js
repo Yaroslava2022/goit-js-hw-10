@@ -11,11 +11,7 @@ const countryInfEl = document.querySelector('.country-info')
 
 function fetchCountries() {
    const country = inputEl.value.trim(); 
-   if (country === "") {
-    countryList.innerHTML = ""
-    countryInfEl.innerHTML = ""
-    return
-   }else {
+  
        return fetch(`https://restcountries.com/v3.1/name/${country}?fields=name,capital,population,flags,languages`).then(
     (res) => {
       if (!res.ok) {
@@ -25,8 +21,7 @@ function fetchCountries() {
     }
     
   );
-   }
-}
+  }
 
 
 function renderCountriesList(users) {
@@ -58,7 +53,8 @@ function renderCountryInfo(users) {
    
   }
   inputEl.addEventListener("input", debounce(() => {
-    
+    if (inputEl.value.trim() === "") {return} 
+    else {
     fetchCountries( )
       .then(
         (users) =>
@@ -73,6 +69,11 @@ function renderCountryInfo(users) {
         else if(users.length === 1) {
           countryList.innerHTML = ""
           renderCountryInfo(users) }
+          else if (users.length === 0) {
+            countryInfEl.innerHTML = "",
+            countryList.innerHTML = ""
+            
+             }
       
       })
       .catch((error) => 
@@ -81,5 +82,5 @@ function renderCountryInfo(users) {
       countryInfEl.innerHTML = "",
       countryList.innerHTML = "",
       );
-  
+    }
      }, DEBOUNCE_DELAY));
