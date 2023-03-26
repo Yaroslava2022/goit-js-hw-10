@@ -1,4 +1,5 @@
 import './css/styles.css';
+// import debounce from 'lodash.debounce';
 
 const DEBOUNCE_DELAY = 300;
 const inputEl = document.querySelector('#search-box')
@@ -9,7 +10,7 @@ const countryList = document.querySelector('.country-list')
 function fetchCountries() {
    const country = inputEl.value.trim();
 
-  return fetch(`https://restcountries.com/v3.1/name/${country}?fields=name,flags`).then(
+  return fetch(`https://restcountries.com/v3.1/name/${country}?fields=name,capital,population,flags,languages`).then(
     (res) => {
       if (!res.ok) {
         throw new Error(res.status);
@@ -26,9 +27,9 @@ console.log(fetchCountries());
 function renderCountriesList(users) {
     const markup = users
       .map((user) => {
-        return `<li>
-        <img class="country__image" src="${user.flags.svg}" width =20px alt="${user.flags.alt}"/>
-        <p> ${user.name.common}</p>
+        return `<li class="country__itm">
+        <img class="country__image" src="${user.flags.svg}" width=30px alt="${user.flags.alt}"/>
+        <p> ${user.name.official}</p>
           </li>`;
       })
       .join("");

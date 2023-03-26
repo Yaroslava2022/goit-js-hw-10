@@ -19,3 +19,19 @@ body {
   max-width: 320px;
   margin-bottom: 16px;
 }
+
+.country-list {
+  list-style: none;
+}
+.country__itm {
+  display: flex;
+  justify-items: flex-start;
+  gap: 10px;
+  align-items: baseline;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: fit-content;
+} 
